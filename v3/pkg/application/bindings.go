@@ -3,6 +3,7 @@ package application
 import (
 	"context"
 	"fmt"
+	"github.com/mitchellh/mapstructure"
 	"reflect"
 	"runtime"
 	"strings"
@@ -356,7 +357,29 @@ func (b *BoundMethod) Call(ctx context.Context, args []interface{}) (returnValue
 			callArgs[index] = reflect.Zero(b.Inputs[index].ReflectType)
 			continue
 		}
-		callArgs[index] = reflect.ValueOf(arg)
+		//callArgs[index] = reflect.ValueOf(arg)
+
+
+		// z add
+		dst := reflect.New(b.Inputs[index].ReflectType)
+		decoder, _ := mapstructure.NewDecoder(&mapstructure.DecoderConfig{
+			DecodeHook:           nil,
+			ErrorUnused:          false,
+			ErrorUnset:           false,
+			ZeroFields:           false,
+			WeaklyTypedInput:     true,
+			Squash:               true,
+			Metadata:             nil,
+			Result:               dst.Interface(),
+			TagName:              "",
+			IgnoreUntaggedFields: false,
+			MatchName:            nil,
+		})
+		if err = decoder.Decode(arg); err != nil {
+			return nil, err
+		}
+		//fmt.Printf("||===> type=%+v, arg=%+v, dst=%+v", b.Inputs[index].ReflectType, arg, dst)
+		callArgs[index] = dst.Elem()
 	}
 
 	// Do the call
