@@ -1,4 +1,4 @@
-module github.com/wailsapp/wails/v3
+module github.com/hellowzsg/wails/v3
 
 go 1.22
 
@@ -34,6 +34,7 @@ require (
 	github.com/tc-hib/winres v0.1.6
 	github.com/wailsapp/go-webview2 v1.0.9
 	github.com/wailsapp/mimetype v1.4.1
+	github.com/wailsapp/wails/v3 v3.0.0-00010101000000-000000000000
 	golang.org/x/sys v0.18.0
 	modernc.org/sqlite v1.21.0
 )
