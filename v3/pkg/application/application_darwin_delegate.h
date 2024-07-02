@@ -5,7 +5,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegateV2 : NSObject <NSApplicationDelegate>
 @property bool shouldTerminateWhenLastWindowClosed;
 @property bool shuttingDown;
 - (BOOL)applicationSupportsSecureRestorableState:(NSApplication *)app;
