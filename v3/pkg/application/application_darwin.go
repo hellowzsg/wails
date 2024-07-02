@@ -16,11 +16,11 @@ extern void registerListener(unsigned int event);
 
 #import <Cocoa/Cocoa.h>
 
-static AppDelegate *appDelegate = nil;
+static AppDelegateV2 *appDelegate = nil;
 
 static void init(void) {
     [NSApplication sharedApplication];
-    appDelegate = [[AppDelegate alloc] init];
+    appDelegate = [[AppDelegateV2 alloc] init];
     [NSApp setDelegate:appDelegate];
 
 	[NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskLeftMouseDown handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
@@ -74,7 +74,7 @@ static bool isDarkMode(void) {
 
 static void setApplicationShouldTerminateAfterLastWindowClosed(bool shouldTerminate) {
 	// Get the NSApp delegate
-	AppDelegate *appDelegate = (AppDelegate*)[NSApp delegate];
+	AppDelegateV2 *appDelegate = (AppDelegateV2*)[NSApp delegate];
 	// Set the applicationShouldTerminateAfterLastWindowClosed boolean
 	appDelegate.shouldTerminateWhenLastWindowClosed = shouldTerminate;
 }
